@@ -67,9 +67,9 @@ class OpenImageIOConan(ConanFile):
         "fmt/*:header_only": True,
     }
 
-    tool_requires = [
-        "yasm/1.3.0",
-    ]
+    # tool_requires = [
+        # "yasm/1.3.0",
+    # ]
 
     def export_sources(self):
         export_conandata_patches(self)
@@ -161,6 +161,10 @@ class OpenImageIOConan(ConanFile):
         tc.cache_variables["USE_Qt5"] = False
         tc.cache_variables["VERBOSE"] = True
         tc.cache_variables["USE_Libsquish"] = False
+
+        # For sccache
+        tc.cache_variables["CMAKE_MSVC_DEBUG_INFORMATION_FORMAT"] = "Embedded"
+        tc.cache_variables["CMAKE_POLICY_DEFAULT_CMP0141"]="NEW"
 
 
         # Conan is normally not used for testing, so fixing this option to not build the tests
